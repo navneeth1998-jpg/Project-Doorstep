@@ -1,0 +1,28 @@
+.env
+venv/
+__pycache__/
+*.pyc
+.claude/
+
+# Local runtime state (not source-controlled)
+package_state.json
+
+# Auto-downloaded pretrained checkpoint (ultralytics fetches this automatically when needed)
+yolov8n.pt
+
+# Superseded local v1 training run output
+runs/
+
+# Datasets and large derived assets - too large for git, kept locally (see README for where to find them)
+training images/Combined package images.v1/
+training images/*.zip
+training images/Raw/
+training images/Doormat Detector.v1i.yolov8/
+training images/validation_results/
+training images/validation_results_v2/
+training images/package_detector_v2_results/**/*.jpg
+training images/package_detector_v2_results/**/*.png
+training images/package_detector_v2_results/**/weights/
+
+# All test/demo photos - testing artifacts; a curated few live in docs/demo_images/ instead
+test_images/
