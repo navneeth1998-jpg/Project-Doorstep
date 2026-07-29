@@ -13,7 +13,7 @@ from pathlib import Path
 
 from ultralytics import YOLO
 
-from telegram_notify import send_photo
+from telegram_notify import send_message, send_photo
 
 MODEL_PATH = "training images/models/package_v2_best.pt"
 CONFIDENCE_THRESHOLD = 0.5
@@ -62,12 +62,19 @@ EVENT_MESSAGES = {
     "picked up": "A package was picked up — {current_count} package(s) remaining at your doorstep.",
 }
 
+# Events that include the photo vs. text-only. A pickup means the doorstep is
+# now emptier, not more full — there's no new "evidence" photo worth attaching.
+EVENTS_WITH_PHOTO = {"arrived", "arrived again"}
+
 
 def notify_if_real_event(event, current_count, image_path):
     if event not in EVENT_MESSAGES:
         return  # "no change" (or any unrecognized event) never sends a message
-    caption = EVENT_MESSAGES[event].format(current_count=current_count)
-    send_photo(image_path, caption)
+    text = EVENT_MESSAGES[event].format(current_count=current_count)
+    if event in EVENTS_WITH_PHOTO:
+        send_photo(image_path, text)
+    else:
+        send_message(text)
 
 
 def check_once(model, image_path):
