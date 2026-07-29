@@ -26,3 +26,6 @@ training images/package_detector_v2_results/**/weights/
 
 # All test/demo photos - testing artifacts; a curated few live in docs/demo_images/ instead
 test_images/
+
+# Internal content strategy notes, not project documentation
+linkedin-moments.md
